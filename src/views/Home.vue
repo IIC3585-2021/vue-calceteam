@@ -7,10 +7,13 @@
     <div class="start" v-on:click="startGame()">
       <p class="start-text">Comenzar juego</p>
     </div>
+    <LeaderBoard></LeaderBoard>
   </div>
 </template>
 
 <script>
+import LeaderBoard from '@/components/LeaderBoard.vue';
+
 export default {
   name: 'Home',
   data() {
@@ -18,6 +21,9 @@ export default {
       username: '',
       empty: '',
     };
+  },
+  components: {
+    LeaderBoard,
   },
   methods: {
     startGame() {

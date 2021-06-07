@@ -51,6 +51,7 @@ export default {
         this.$store.commit('increment');
         this.loadQuestion();
       } else {
+        this.$store.commit('gameover');
         this.$router.push('gameover');
       }
     },
