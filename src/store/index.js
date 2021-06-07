@@ -3,6 +3,7 @@ import { createStore } from 'vuex';
 export default createStore({
   state() {
     return {
+      username: '',
       score: 0,
       breeds: [],
     };
@@ -16,6 +17,9 @@ export default createStore({
     },
     setBreeds(state, list) {
       state.breeds = list;
+    },
+    setUsername(state, name) {
+      state.username = name;
     },
   },
   actions: {

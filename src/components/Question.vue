@@ -1,5 +1,8 @@
 <template>
   <div class="question">
+    <p class="username">
+      {{`Jugador(a): ${this.$store.state.username}`}}
+    </p>
     <p class="question-text">
       ¿De qué raza es el perro de la foto?
     </p>
@@ -90,6 +93,15 @@ export default {
 };
 </script>
 <style>
+.username {
+  position: absolute;
+  top: 3vh;
+  left: 3vw;
+  color: #000;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
 .question {
   display: flex;
   height: 100vh;
@@ -134,10 +146,10 @@ export default {
 
 .score {
   position: absolute;
-  top: 3vh;
-  right: 3vw;
+  top: 10vh;
+  left: 3vw;
   color: #000;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   margin: 0;
 }
