@@ -13,7 +13,7 @@ export default createStore({
       username: '',
       score: 0,
       breeds: [],
-      scores: [{ name: 'Juan', score: 10 }, { name: 'María', score: 5 }],
+      scores: [],
     };
   },
   mutations: {
@@ -21,6 +21,10 @@ export default createStore({
       state.score += 1;
     },
     reset(state) {
+      state.username = '';
+      state.score = 0;
+    },
+    retry(state) {
       state.score = 0;
     },
     setBreeds(state, list) {

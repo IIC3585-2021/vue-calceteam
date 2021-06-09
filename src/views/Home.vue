@@ -9,7 +9,8 @@
     </p>
     <input
       v-model="username"
-      placeholder="username"
+      placeholder="Nombre de usuario"
+      class="input"
     />
     <p>
       {{ empty }}
@@ -22,13 +23,13 @@
         Comenzar juego
       </p>
     </div>
-    <LeaderBoard></LeaderBoard>
   </div>
+  <InfoBar />
 </template>
 
 <script>
 import Loading from '@/components/Loading.vue';
-import LeaderBoard from '@/components/LeaderBoard.vue';
+import InfoBar from '@/components/InfoBar.vue';
 
 export default {
   name: 'Home',
@@ -40,7 +41,7 @@ export default {
     };
   },
   components: {
-    LeaderBoard,
+    InfoBar,
     Loading,
   },
   methods: {
@@ -78,7 +79,7 @@ export default {
 .home {
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 75vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -88,15 +89,28 @@ export default {
   font-size: 200px;
   color: white;
   font-weight: 1000;
-  margin: 0 0 10vh 0;
+  margin: 0 0 12vh 0;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .subtitle {
-  font-size: 20px;
-  color: black;
+  font-size: 25px;
+  color: white;
   font-weight: semi-bold;
-  margin: 0 0 3vh 0;
+  margin: 0 17vw 1vh 0;
+}
+
+.input {
+  height: 7vh;
+  width: 28vw;
+  padding: 0 1vw;
+  border-radius: 15px;
+  border: none;
+  font-size: 30px;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .start {

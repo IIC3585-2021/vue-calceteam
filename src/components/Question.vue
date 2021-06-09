@@ -1,17 +1,11 @@
 <template>
   <div class="question">
     <Loading v-if="loading" />
-    <p class="username">
-      {{`Jugador(a): ${this.$store.state.username}`}}
-    </p>
     <div class="question-container">
       <p class="question-text">
         ¿De qué raza es el perro de la foto?
       </p>
     </div>
-    <p class="score">
-      {{`Puntaje: ${this.$store.state.score}`}}
-    </p>
     <img
       class="question-img"
       v-bind:src="url"
@@ -43,12 +37,12 @@ function shuffleArray(list) {
 }
 
 export default {
+  name: 'Question',
   data() {
     return {
       url: '',
       options: [],
-      answer: '',
-      correct: 'Dalmata',
+      correct: '',
       loading: true,
     };
   },
@@ -73,23 +67,21 @@ export default {
           if (specificBreed.length > 1) {
             breed = `${specificBreed[1]} ${specificBreed[0]}`;
           } else {
-            // eslint-disable-next-line prefer-destructuring
             breed = specificBreed[0];
           }
-          this.options = [breed];
+          const newOptions = [breed];
           const len = this.$store.state.breeds.length;
           if (len < 4) {
             this.$router.push('/');
           }
-          while (this.options.length < 4) {
+          while (newOptions.length < 4) {
             const index = Math.floor(Math.random() * len);
             const elem = this.$store.state.breeds[index];
-            if (!this.options.includes(elem)) {
-              this.options.push(elem);
+            if (!newOptions.includes(elem)) {
+              newOptions.push(elem);
             }
           }
-          this.options = shuffleArray(this.options);
-          // eslint-disable-next-line prefer-destructuring
+          this.options = shuffleArray(newOptions);
           this.correct = breed;
           this.url = resJson.message;
         });
@@ -105,21 +97,13 @@ export default {
 };
 </script>
 <style>
-.username {
-  position: absolute;
-  top: 3vh;
-  left: 3vw;
-  color: #000;
-  font-size: 30px;
-  font-weight: bold;
-  margin: 0;
-}
 .question {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  padding: 5vh 0;
+  width: 75vw;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -139,11 +123,11 @@ export default {
   cursor: pointer;
   background-color: #35d433;
   display: flex;
-  width: 40vw;
+  width: 35vw;
   height: 6vh;
   align-items: center;
   justify-content: center;
-  margin: 3vh 0 0 0;
+  margin: 1vh 0 0 0;
   border: 1px solid white;
   border-radius: 3vh;
 }
@@ -153,7 +137,7 @@ export default {
 
 .option-text {
   color: white;
-  font-size: 4vh;
+  font-size: 3.5vh;
   font-weight: bold;
   margin: 0;
 }
@@ -166,17 +150,8 @@ export default {
 }
 
 .question-img {
-  height: 50vh;
+  height: 45vh;
   border-radius: 10px;
 }
 
-.score {
-  position: absolute;
-  top: 10vh;
-  left: 3vw;
-  color: #000;
-  font-size: 30px;
-  font-weight: bold;
-  margin: 0;
-}
 </style>
