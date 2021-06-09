@@ -11,7 +11,7 @@
       class="button"
     >
       <p class="button-text">
-        Volver al inicio
+        Nuevo juego
       </p>
     </div>
     <div
@@ -19,7 +19,7 @@
       class="button"
     >
       <p class="button-text">
-        Volver a jugar
+        Volver a intentar
       </p>
     </div>
     <LeaderBoard></LeaderBoard>
@@ -48,15 +48,15 @@ export default {
 
 <style>
 .over {
-  color: black;
-  font-size: 60px;
-  font-weight: bold;
+  color: white;
+  font-size: 150px;
+  font-weight: 1000;
   margin: 0;
 }
 
 .final-score {
-  color: black;
-  font-size: 25px;
+  color: white;
+  font-size: 50px;
   font-weight: bold;
   margin: 2vh 0 0 0;
 }
@@ -72,14 +72,15 @@ export default {
 
 .button {
   width: 30vw;
-  height: 5vh;
+  height: 7vh;
   display: flex;
   background-color: #35d433;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 20px;
   cursor: pointer;
   margin: 3vh 0 0 0;
+  border: 1px solid white;
 }
 
 .button:hover {
@@ -88,7 +89,7 @@ export default {
 
 .button-text {
   color: white;
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bold;
   margin: 0;
 }

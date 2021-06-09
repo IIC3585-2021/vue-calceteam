@@ -1,17 +1,21 @@
 <template>
   <div class="question">
+    <Loading v-if="loading" />
     <p class="username">
       {{`Jugador(a): ${this.$store.state.username}`}}
     </p>
-    <p class="question-text">
-      ¿De qué raza es el perro de la foto?
-    </p>
+    <div class="question-container">
+      <p class="question-text">
+        ¿De qué raza es el perro de la foto?
+      </p>
+    </div>
     <p class="score">
       {{`Puntaje: ${this.$store.state.score}`}}
     </p>
     <img
       class="question-img"
       v-bind:src="url"
+      @load="this.loading= false"
     >
     <div
       class="option"
@@ -27,6 +31,8 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading.vue';
+
 function shuffleArray(list) {
   const array = [...list];
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -43,6 +49,7 @@ export default {
       options: [],
       answer: '',
       correct: 'Dalmata',
+      loading: true,
     };
   },
   methods: {
@@ -56,6 +63,7 @@ export default {
       }
     },
     loadQuestion() {
+      this.loading = true;
       fetch('https://dog.ceo/api/breeds/image/random')
         .then(async (res) => {
           const resJson = await res.json();
@@ -91,6 +99,9 @@ export default {
     console.log(this.$store.state.breeds);
     this.loadQuestion();
   },
+  components: {
+    Loading,
+  },
 };
 </script>
 <style>
@@ -112,6 +123,18 @@ export default {
   align-items: center;
 }
 
+.question-container {
+  width: 50vw;
+  background-color: #557bad;
+  border: 1px solid white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh 0;
+  margin-bottom: 3vh;
+}
+
 .option {
   cursor: pointer;
   background-color: #35d433;
@@ -121,7 +144,8 @@ export default {
   align-items: center;
   justify-content: center;
   margin: 3vh 0 0 0;
-  border-radius: 10px;
+  border: 1px solid white;
+  border-radius: 3vh;
 }
 .option:hover {
   opacity: .7;
@@ -135,14 +159,15 @@ export default {
 }
 
 .question-text {
-  font-size: 35px;
-  color: #000;
-  font-weight: bold;
-  margin: 0 0 3vh 0;
+  font-size: 40px;
+  color: white;
+  font-weight: 1000;
+  margin: 0;
 }
 
 .question-img {
   height: 50vh;
+  border-radius: 10px;
 }
 
 .score {
