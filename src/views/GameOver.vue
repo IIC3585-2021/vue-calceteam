@@ -22,11 +22,17 @@
         Volver a intentar
       </p>
     </div>
+    <LeaderBoard></LeaderBoard>
   </div>
 </template>
 
 <script>
+import LeaderBoard from '@/components/LeaderBoard.vue';
+
 export default {
+  components: {
+    LeaderBoard,
+  },
   methods: {
     reTry() {
       this.$store.commit('reset');

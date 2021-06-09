@@ -4,48 +4,72 @@
     <p class="title">
       DogQuizz
     </p>
+    <p class="subtitle">
+      Ingresa tu nombre
+    </p>
+    <input
+      v-model="username"
+      placeholder="username"
+    />
+    <p>
+      {{ empty }}
+    </p>
     <div
       class="start"
-      v-on:click="this.$router.push('game')"
+      v-on:click="startGame()"
     >
       <p class="start-text">
         Comenzar juego
       </p>
     </div>
+    <LeaderBoard></LeaderBoard>
   </div>
 </template>
 
 <script>
 import Loading from '@/components/Loading.vue';
+import LeaderBoard from '@/components/LeaderBoard.vue';
 
 export default {
   name: 'Home',
   data() {
     return {
+      username: '',
+      empty: '',
       loading: true,
     };
   },
   components: {
+    LeaderBoard,
     Loading,
   },
+  methods: {
+    startGame() {
+      if (this.username.length) {
+        this.$router.push('game');
+        this.$store.commit('setUsername', this.username);
+      } else {
+        this.empty = 'Debes ingresar un nombre';
+      }
+    },
+  },
   mounted() {
-    fetch('https://dog.ceo/api/breeds/list/all')
-      .then(async (res) => {
-        const resJson = await res.json();
-        const breedsList = resJson.message;
-        const breeds = [];
-        Object.keys(breedsList).forEach((breed) => {
-          if (breedsList[breed].length > 0) {
-            breedsList[breed].forEach((type) => {
-              breeds.push(`${type} ${breed}`.toUpperCase());
-            });
-          } else {
-            breeds.push(breed.toUpperCase());
-          }
-        });
-        this.$store.commit('setBreeds', breeds);
-        this.loading = false;
+    fetch('https://dog.ceo/api/breeds/list/all').then(async (res) => {
+      const resJson = await res.json();
+      const breedsList = resJson.message;
+      const breeds = [];
+      Object.keys(breedsList).forEach((breed) => {
+        if (breedsList[breed].length > 0) {
+          breedsList[breed].forEach((type) => {
+            breeds.push(`${type} ${breed}`.toUpperCase());
+          });
+        } else {
+          breeds.push(breed.toUpperCase());
+        }
       });
+      this.$store.commit('setBreeds', breeds);
+      this.loading = false;
+    });
   },
 };
 </script>
@@ -68,6 +92,13 @@ export default {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+.subtitle {
+  font-size: 20px;
+  color: black;
+  font-weight: semi-bold;
+  margin: 0 0 3vh 0;
+}
+
 .start {
   width: 30vw;
   height: 7vh;
@@ -81,7 +112,7 @@ export default {
 }
 
 .start:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .start-text {

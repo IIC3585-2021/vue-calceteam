@@ -1,5 +1,8 @@
 # vue-calceteam
 
+- [Slides](https://docs.google.com/presentation/d/1J-EA4YhBNSqmgAYI8BS3VnbKsftKWaxUVKhu6GgfuWc/edit?usp=sharing)
+
+
 ## Project setup
 ```
 npm install
