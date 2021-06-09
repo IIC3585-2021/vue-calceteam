@@ -88,7 +88,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.state.breeds);
     this.loadQuestion();
   },
   components: {
@@ -153,5 +152,4 @@ export default {
   height: 45vh;
   border-radius: 10px;
 }
-
 </style>
