@@ -22,20 +22,21 @@
         Volver a intentar
       </p>
     </div>
-    <LeaderBoard></LeaderBoard>
   </div>
+  <InfoBar />
 </template>
 
 <script>
-import LeaderBoard from '@/components/LeaderBoard.vue';
+import InfoBar from '@/components/InfoBar.vue';
 
 export default {
+  name: 'GameOver',
   components: {
-    LeaderBoard,
+    InfoBar,
   },
   methods: {
     reTry() {
-      this.$store.commit('reset');
+      this.$store.commit('retry');
       this.$router.push('game');
     },
     toHome() {
@@ -62,7 +63,7 @@ export default {
 }
 
 .game-over{
-  width: 100vw;
+  width: 75vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -71,7 +72,7 @@ export default {
 }
 
 .button {
-  width: 30vw;
+  width: 40vw;
   height: 7vh;
   display: flex;
   background-color: #35d433;
